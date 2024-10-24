@@ -1,0 +1,39 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 初始资金
+initial_funds = 1000
+# 收入
+revenues = [500, 300]
+# 成本
+costs = [200, 100]
+
+# 构建数据序列
+data = [initial_funds]
+for r in revenues:
+    data.append(r)
+for c in costs:
+    data.append(-c)
+print(f"data:,{data}")
+
+# 创建标签
+labels = ['Initial Funds']
+for i in range(len(revenues)):
+    labels.append('Revenue {}'.format(i + 1))
+for i in range(len(costs)):
+    labels.append('Cost {}'.format(i + 1))
+print(f"labels,{labels}")
+
+# 计算累积数据
+y_positions = np.cumsum(data)
+print(f"y_positions,{y_positions}")
+
+# 绘制垂直瀑布图
+bottom = 0
+for i, value in enumerate(data):
+    plt.bar(i, value, bottom=bottom)#value:确定每条柱子的高度
+    bottom += value#确定每条柱子底边的位置
+
+
+plt.xticks(range(len(data)), labels)
+plt.show()
